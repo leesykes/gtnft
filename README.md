@@ -37,7 +37,7 @@ Before you begin, you need to install the following tools:
 
 🚀 Once your project is live, share the minting URL so others can see and mint their unique SVG NFTs!
 
-🌟 Use Loogies NFT as an example to guide your project. This will provide a solid foundation and inspiration for creating your own dynamic SVG NFTs.
+🌟 Use GTNFT NFT as an example to guide your project. This will provide a solid foundation and inspiration for creating your own dynamic SVG NFTs.
 
 > 💬 Meet other builders working on this challenge and get help in the [🎁 SVG NFT 🎫 Building Cohort](https://t.me/+mUeITJ5u7Ig0ZWJh)!
 
@@ -47,7 +47,7 @@ Before you begin, you need to install the following tools:
 
 This challenge is brimming with creative freedom, giving you the opportunity to explore various approaches!
 
-🌟 To help guide your efforts, consider the following goals. Additionally, the current branch includes an example of SVG NFTs, the Loogies. Feel free to use it as inspiration or start your project entirely from scratch! 🚀
+🌟 To help guide your efforts, consider the following goals. Additionally, the current branch includes an example of SVG NFTs, the GTNFT. Feel free to use it as inspiration or start your project entirely from scratch! 🚀
 
 ### 🥅 Goals:
 
@@ -65,11 +65,11 @@ This challenge is brimming with creative freedom, giving you the opportunity to 
 
 ---
 
-## 👇🏼 Quick Loogies NFT Breakdown 🎨
+## 👇🏼 Quick GTNFT NFT Breakdown 🎨
 
 A fully-on-chain SVG NFT puts both the artwork and its metadata directly onto the blockchain, guaranteeing that the image can be reconstructed forever without IPFS or web servers.
 
-Loogies NFT contract shows how to generate dynamic SVG NFTs entirely on-chain using deterministic randomness, dynamic pricing, and real-time SVG generation.
+GTNFT NFT contract shows how to generate dynamic SVG NFTs entirely on-chain using deterministic randomness, dynamic pricing, and real-time SVG generation.
 
 **🔄 Minting Flow:**
 

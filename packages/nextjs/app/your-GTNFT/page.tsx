@@ -7,10 +7,10 @@ import { formatEther } from "viem";
 import { useAccount } from "wagmi";
 import { useScaffoldContract, useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 
-const YourLoogies: NextPage = () => {
+const YourGTNFT: NextPage = () => {
   const { address: connectedAddress } = useAccount();
-  const [yourLoogies, setYourLoogies] = useState<any[]>();
-  const [loadingLoogies, setLoadingLoogies] = useState(true);
+  const [yourGTNFT, setYourGTNFT] = useState<any[]>();
+  const [loadingGTNFT, setLoadingGTNFT] = useState(true);
 
   const { data: price } = useScaffoldReadContract({
     contractName: "YourCollectible",
@@ -35,8 +35,8 @@ const YourLoogies: NextPage = () => {
   });
 
   useEffect(() => {
-    const updateAllLoogies = async () => {
-      setLoadingLoogies(true);
+    const updateAllGTNFT = async () => {
+      setLoadingGTNFT(true);
       if (contract && balance && connectedAddress) {
         const collectibleUpdate = [];
         for (let tokenIndex = 0n; tokenIndex < balance; tokenIndex++) {
@@ -56,11 +56,11 @@ const YourLoogies: NextPage = () => {
           }
         }
         console.log("Collectible Update: ", collectibleUpdate);
-        setYourLoogies(collectibleUpdate);
+        setYourGTNFT(collectibleUpdate);
       }
-      setLoadingLoogies(false);
+      setLoadingGTNFT(false);
     };
-    updateAllLoogies();
+    updateAllGTNFT();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [balance, connectedAddress, Boolean(contract)]);
 
@@ -68,11 +68,11 @@ const YourLoogies: NextPage = () => {
     <>
       <div className="flex items-center flex-col flex-grow pt-10">
         <div className="relative w-48 h-48 -m-12">
-          <Image alt="Loogie" className="cursor-pointer" fill src="/your-loogie.svg" />
+          <Image alt="GTNFT" className="cursor-pointer" fill src="/your-GTNFT.svg" />
         </div>
         <div className="px-5">
           <h1 className="text-center">
-            <span className="block text-4xl font-bold">Your Loogies</span>
+            <span className="block text-4xl font-bold">Your GTNFT</span>
           </h1>
           <div className="flex flex-col justify-center items-center mt-4 space-x-2">
             <button
@@ -91,20 +91,20 @@ const YourLoogies: NextPage = () => {
             >
               Mint Now for {price ? (+formatEther(price)).toFixed(6) : "-"} ETH
             </button>
-            <p>{Number(3728n - (totalSupply || 0n))} Loogies left</p>
+            <p>{Number(3728n - (totalSupply || 0n))} GTNFT left</p>
           </div>
         </div>
 
         <div className="flex-grow bg-base-300 w-full mt-4 p-8">
           <div className="flex justify-center items-center space-x-2">
-            {loadingLoogies ? (
+            {loadingGTNFT ? (
               <p className="my-2 font-medium">Loading...</p>
-            ) : !yourLoogies?.length ? (
-              <p className="my-2 font-medium">No loogies minted</p>
+            ) : !yourGTNFT?.length ? (
+              <p className="my-2 font-medium">No GTNFT minted</p>
             ) : (
               <div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-center">
-                  {yourLoogies.map(loogie => {
+                  {yourGTNFT.map(loogie => {
                     return (
                       <div
                         key={loogie.id}
@@ -126,4 +126,4 @@ const YourLoogies: NextPage = () => {
   );
 };
 
-export default YourLoogies;
+export default YourGTNFT;

@@ -8,11 +8,11 @@ import { useAccount } from "wagmi";
 import { Address } from "~~/components/scaffold-eth";
 import { useScaffoldContract, useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 
-const Loogies: NextPage = () => {
+const GTNFT: NextPage = () => {
   const { address: connectedAddress } = useAccount();
-  const [allLoogies, setAllLoogies] = useState<any[]>();
+  const [allGTNFT, setAllGTNFT] = useState<any[]>();
   const [page, setPage] = useState(1n);
-  const [loadingLoogies, setLoadingLoogies] = useState(true);
+  const [loadingGTNFT, setLoadingGTNFT] = useState(true);
   const perPage = 12n;
 
   const { data: price } = useScaffoldReadContract({
@@ -32,8 +32,8 @@ const Loogies: NextPage = () => {
   });
 
   useEffect(() => {
-    const updateAllLoogies = async () => {
-      setLoadingLoogies(true);
+    const updateAllGTNFT = async () => {
+      setLoadingGTNFT(true);
       if (contract && totalSupply) {
         const collectibleUpdate = [];
         const startIndex = totalSupply - 1n - perPage * (page - 1n);
@@ -54,11 +54,11 @@ const Loogies: NextPage = () => {
           }
         }
         console.log("Collectible Update: ", collectibleUpdate);
-        setAllLoogies(collectibleUpdate);
+        setAllGTNFT(collectibleUpdate);
       }
-      setLoadingLoogies(false);
+      setLoadingGTNFT(false);
     };
-    updateAllLoogies();
+    updateAllGTNFT();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [totalSupply, page, perPage, Boolean(contract)]);
 
@@ -66,19 +66,19 @@ const Loogies: NextPage = () => {
     <>
       <div className="flex items-center flex-col flex-grow pt-10">
         <div className="relative w-48 h-48 -m-12">
-          <Image alt="Loogie" className="cursor-pointer" fill src="/loogie.svg" />
+          <Image alt="" className="cursor-pointer" fill src="/GTNFT.svg" />
         </div>
         <div className="px-5">
           <h1 className="text-center">
-            <span className="block text-4xl font-bold">OptimisticLoogies</span>
-            <span className="block text-2xl mt-4 mb-2">Loogies with a smile :)</span>
+            <span className="block text-4xl font-bold">GTNFT</span>
+            <span className="block text-2xl mt-4 mb-2">Generative Tiling NFT</span>
           </h1>
           <div className="text-center">
-            <div>Only 3728 Optimistic Loogies available on a price curve increasing 0.2% with each new mint.</div>
+            <div>Only 3728 Optimistic GTNFT available on a price curve increasing 0.2% with each new mint.</div>
             <div>
               Double the supply of the{" "}
-              <a className="underline" href="https://loogies.io/" target="_blank">
-                Original Ethereum Mainnet Loogies
+              <a className="underline" href="https://GTNFT.io/" target="_blank">
+                Original Ethereum Mainnet GTNFT
               </a>
             </div>
           </div>
@@ -99,20 +99,20 @@ const Loogies: NextPage = () => {
             >
               Mint Now for {price ? (+formatEther(price)).toFixed(6) : "-"} ETH
             </button>
-            <p>{Number(3728n - (totalSupply || 0n))} Loogies left</p>
+            <p>{Number(3728n - (totalSupply || 0n))} GTNFT left</p>
           </div>
         </div>
 
         <div className="flex-grow bg-base-300 w-full mt-4 p-8">
           <div className="flex justify-center items-center space-x-2">
-            {loadingLoogies ? (
+            {loadingGTNFT ? (
               <p className="my-2 font-medium">Loading...</p>
-            ) : !allLoogies?.length ? (
-              <p className="my-2 font-medium">No loogies minted</p>
+            ) : !allGTNFT?.length ? (
+              <p className="my-2 font-medium">No GTNFT minted</p>
             ) : (
               <div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-center">
-                  {allLoogies.map(loogie => {
+                  {allGTNFT.map(loogie => {
                     return (
                       <div
                         key={loogie.id}
@@ -150,4 +150,4 @@ const Loogies: NextPage = () => {
   );
 };
 
-export default Loogies;
+export default GTNFT;

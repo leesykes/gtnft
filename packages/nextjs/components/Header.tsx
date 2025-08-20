@@ -22,13 +22,13 @@ export const menuLinks: HeaderMenuLink[] = [
     href: "/",
   },
   {
-    label: "All Loogies",
-    href: "/loogies",
+    label: "All GTNFT",
+    href: "/GTNFT",
     icon: <FaceSmileIcon className="h-4 w-4" />,
   },
   {
-    label: "Your Loogies",
-    href: "/your-loogies",
+    label: "Your GTNFT",
+    href: "/your-GTNFT",
     icon: <BriefcaseIcon className="h-4 w-4" />,
   },
   {

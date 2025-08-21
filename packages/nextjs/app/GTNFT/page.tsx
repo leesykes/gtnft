@@ -75,12 +75,7 @@ const GTNFT: NextPage = () => {
           </h1>
           <div className="text-center">
             <div>Only 3728 Optimistic GTNFT available on a price curve increasing 0.2% with each new mint.</div>
-            <div>
-              Double the supply of the{" "}
-              <a className="underline" href="https://GTNFT.io/" target="_blank">
-                Original Ethereum Mainnet GTNFT
-              </a>
-            </div>
+            <div></div>
           </div>
           <div className="flex flex-col justify-center items-center mt-6 space-x-2">
             <button

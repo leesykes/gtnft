@@ -11,8 +11,8 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata = getMetadata({
-  title: "Svg NFT | SpeedRunEthereum",
-  description: "Built with 🏗 Scaffold-ETH 2",
+  title: "Generative Tiling NFT",
+  description: "Based on Speedrun Thereium NFT challenge",
 });
 
 const ScaffoldEthApp = ({ children }: { children: React.ReactNode }) => {

@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   31337: {
     YourCollectible: {
-      address: "0xF71Ea2f0A4ffC8f98Dee72D1C19401430EB3d746",
+      address: "0x4A679253410272dd5232B3Ff7cF5dbB88f295319",
       abi: [
         {
           inputs: [],
@@ -214,6 +214,45 @@ const deployedContracts = {
           type: "event",
         },
         {
+          inputs: [],
+          name: "COLLECTION_LIMIT",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "CURVE_BPS",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "RECIPIENT",
+          outputs: [
+            {
+              internalType: "address payable",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
           inputs: [
             {
               internalType: "address",
@@ -240,19 +279,6 @@ const deployedContracts = {
             },
           ],
           name: "balanceOf",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [],
-          name: "curve",
           outputs: [
             {
               internalType: "uint256",
@@ -301,19 +327,6 @@ const deployedContracts = {
               internalType: "bool",
               name: "",
               type: "bool",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [],
-          name: "limit",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
             },
           ],
           stateMutability: "view",
@@ -372,38 +385,6 @@ const deployedContracts = {
               internalType: "uint256",
               name: "",
               type: "uint256",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [],
-          name: "recipient",
-          outputs: [
-            {
-              internalType: "address payable",
-              name: "",
-              type: "address",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "uint256",
-              name: "id",
-              type: "uint256",
-            },
-          ],
-          name: "renderTokenById",
-          outputs: [
-            {
-              internalType: "string",
-              name: "",
-              type: "string",
             },
           ],
           stateMutability: "view",
@@ -597,17 +578,7 @@ const deployedContracts = {
           outputs: [
             {
               internalType: "uint8",
-              name: "palette",
-              type: "uint8",
-            },
-            {
-              internalType: "uint8",
-              name: "complexity",
-              type: "uint8",
-            },
-            {
-              internalType: "enum YourCollectible.Feature",
-              name: "feature",
+              name: "",
               type: "uint8",
             },
           ],
@@ -655,7 +626,7 @@ const deployedContracts = {
         totalSupply: "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol",
         transferFrom: "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol",
       },
-      deployedOnBlock: 107,
+      deployedOnBlock: 140,
     },
   },
   11155420: {

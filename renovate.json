@@ -1,0 +1,21 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended", ":dependencyDashboard"],
+  "packageRules": [
+    {
+      "groupName": "nextjs packages",
+      "matchPaths": ["packages/nextjs/**"],
+      "matchPackagePatterns": ["^next", "^react", "^wagmi", "^viem", "^rainbowkit"]
+    },
+    {
+      "groupName": "hardhat packages",
+      "matchPaths": ["packages/hardhat/**"]
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "automerge": true
+    }
+  ],
+  "prConcurrentLimit": 5,
+  "schedule": ["before 6am on monday"]
+}

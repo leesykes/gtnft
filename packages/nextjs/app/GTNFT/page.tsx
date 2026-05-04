@@ -40,12 +40,15 @@ const GTNFT: NextPage = () => {
         for (let tokenIndex = startIndex; tokenIndex > startIndex - perPage && tokenIndex >= 0; tokenIndex--) {
           try {
             const tokenId = await contract.read.tokenByIndex([tokenIndex]);
-            const tokenURI = await contract.read.tokenURI([tokenId]);
+            const [tokenURI, owner] = await Promise.all([
+              contract.read.tokenURI([tokenId]),
+              contract.read.ownerOf([tokenId]),
+            ]);
             const jsonManifestString = atob(tokenURI.substring(29));
 
             try {
               const jsonManifest = JSON.parse(jsonManifestString);
-              collectibleUpdate.push({ id: tokenId, uri: tokenURI, ...jsonManifest });
+              collectibleUpdate.push({ id: tokenId, uri: tokenURI, owner, ...jsonManifest });
             } catch (e) {
               console.log(e);
             }

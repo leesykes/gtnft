@@ -55,13 +55,12 @@
   },
   "packageManager": "yarn@4.14.1",
   "engines": {
-    "node": ">=20.18.3"
+    "node": ">=20.18.3 <24"
   },
   "dependencies": {
     "vercel": "latest"
   },
   "resolutions": {
-    "wagmi": "2.19.5",
-    "viem": "2.39.3"
+    "wagmi": "2.19.5"
   }
 }

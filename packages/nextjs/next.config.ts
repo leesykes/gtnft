@@ -13,17 +13,17 @@ const nextConfig: NextConfig = {
     config.resolve.fallback = { fs: false, net: false, tls: false };
     config.externals.push("pino-pretty", "lokijs", "encoding", "@react-native-async-storage/async-storage");
     if (!dev) {
-      // Replace Next.js's SWC minimizer (which crashes on viem/appkit code with
-      // '_webpack.WebpackError is not a constructor') with Terser, which handles
-      // all modern JS without misinterpreting identifiers as TypeScript keywords.
+      // Replace Next.js's SWC minimizer (which crashes with '_webpack.WebpackError
+      // is not a constructor') with TerserPlugin using SWC's minifier. SWC's minifier
+      // is built on the SWC TypeScript parser, so it handles 'abstract class' and
+      // TC39 '@decorator' syntax from packages that ship partially-TS compiled output.
       // eslint-disable-next-line @typescript-eslint/no-require-imports
       const TerserPlugin = require("terser-webpack-plugin");
       config.optimization.minimizer = [
         new TerserPlugin({
-          parallel: true,
+          minify: TerserPlugin.swcMinify,
           terserOptions: {
-            ecma: 2020,
-            compress: { passes: 1 },
+            compress: true,
             mangle: true,
           },
         }),

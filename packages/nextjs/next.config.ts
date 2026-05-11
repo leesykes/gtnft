@@ -17,7 +17,7 @@ const nextConfig: NextConfig = {
       // with esbuild, which handles all modern JS including BigInt, private fields, etc.
       // eslint-disable-next-line @typescript-eslint/no-require-imports
       const { EsbuildPlugin } = require("esbuild-loader");
-      config.optimization.minimizer = [new EsbuildPlugin({ target: "es2020" })];
+      config.optimization.minimizer = [new EsbuildPlugin({ target: "esnext" })];
     }
     return config;
   },

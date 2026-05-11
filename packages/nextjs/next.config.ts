@@ -9,9 +9,10 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  webpack: config => {
+  webpack: (config, { dev }) => {
     config.resolve.fallback = { fs: false, net: false, tls: false };
     config.externals.push("pino-pretty", "lokijs", "encoding", "@react-native-async-storage/async-storage");
+    if (!dev) config.optimization.minimize = false;
     return config;
   },
 };

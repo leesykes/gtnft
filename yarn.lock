@@ -4331,7 +4331,7 @@ __metadata:
     abitype: "npm:1.0.6"
     autoprefixer: "npm:~10.4.20"
     bgipfs: "npm:~0.0.12"
-    blo: "npm:~1.2.0"
+    blo: "npm:~2.0.0"
     burner-connector: "npm:0.0.20"
     daisyui: "npm:5.0.9"
     eslint: "npm:~9.23.0"
@@ -8330,10 +8330,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"blo@npm:~1.2.0":
-  version: 1.2.0
-  resolution: "blo@npm:1.2.0"
-  checksum: 10c0/c060ddb987bbfe51d6647a0da71cb38d6184e78939a6910f3b231c1173d7c329a5e7ca4adc6497a36ea52237c17f51fb29ce3a38a71c890227bb368f154c6e67
+"blo@npm:~2.0.0":
+  version: 2.0.0
+  resolution: "blo@npm:2.0.0"
+  checksum: 10c0/1d654f4a5852e0f2241fd17d1a9730dc7717b8d30b1b0fcf48878f8164648514f7b04dbc02721f7486f455fc900c0ef5a7dc8f81947c5f4be7a06d5b4aea7ccb
   languageName: node
   linkType: hard
 

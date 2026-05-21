@@ -9,26 +9,19 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  webpack: (config, { dev }) => {
+  webpack: (config) => {
     config.resolve.fallback = { fs: false, net: false, tls: false };
-    config.externals.push("pino-pretty", "lokijs", "encoding", "@react-native-async-storage/async-storage");
-    if (!dev) {
-      // Replace Next.js's SWC minimizer (which crashes with '_webpack.WebpackError
-      // is not a constructor') with TerserPlugin using SWC's minifier. SWC's minifier
-      // is built on the SWC TypeScript parser, so it handles 'abstract class' and
-      // TC39 '@decorator' syntax from packages that ship partially-TS compiled output.
-      // eslint-disable-next-line @typescript-eslint/no-require-imports
-      const TerserPlugin = require("terser-webpack-plugin");
-      config.optimization.minimizer = [
-        new TerserPlugin({
-          minify: TerserPlugin.swcMinify,
-          terserOptions: {
-            compress: true,
-            mangle: true,
-          },
-        }),
-      ];
-    }
+    // Use explicit CommonJS format so webpack generates require("pkg") instead of
+    // treating the package name as a JS identifier. Scoped packages like
+    // @react-native-async-storage/async-storage start with '@' which is not a valid
+    // JS token outside decorator context, causing every minifier to fail with a
+    // syntax error when the var-type external stub is parsed.
+    config.externals.push(
+      { "pino-pretty": "commonjs pino-pretty" },
+      { lokijs: "commonjs lokijs" },
+      { encoding: "commonjs encoding" },
+      { "@react-native-async-storage/async-storage": "commonjs @react-native-async-storage/async-storage" },
+    );
     return config;
   },
 };

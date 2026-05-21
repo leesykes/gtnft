@@ -4325,7 +4325,7 @@ __metadata:
     "@tanstack/react-query": "npm:~5.59.15"
     "@trivago/prettier-plugin-sort-imports": "npm:~4.3.0"
     "@types/node": "npm:~18.19.50"
-    "@types/react": "npm:~19.0.7"
+    "@types/react": "npm:~19.2.0"
     "@uniswap/sdk-core": "npm:~5.8.2"
     "@uniswap/v2-sdk": "npm:~4.6.1"
     abitype: "npm:1.0.6"
@@ -5823,12 +5823,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:~19.0.7":
-  version: 19.0.14
-  resolution: "@types/react@npm:19.0.14"
+"@types/react@npm:~19.2.0":
+  version: 19.2.15
+  resolution: "@types/react@npm:19.2.15"
   dependencies:
-    csstype: "npm:^3.0.2"
-  checksum: 10c0/e5d9ac42fc6d66c21b7020c8ae1a8190c486e63e5daf2f67b67694dd39c6264cc92a57f90b84525bf73774b90f91bd3b1d907022bcc9b36d6d4ffbcf001f8feb
+    csstype: "npm:^3.2.2"
+  checksum: 10c0/b554eab715bb14e581f0ae60e5cefe91e1a5e06c31022b543a9806cf224aa056f21e4fb46208e46eb934d86ca0b247ebc82377192a0dead303cb28b8764c6e67
   languageName: node
   linkType: hard
 
@@ -9339,7 +9339,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"csstype@npm:^3.0.2, csstype@npm:^3.0.7, csstype@npm:^3.2.3":
+"csstype@npm:^3.0.7, csstype@npm:^3.2.2, csstype@npm:^3.2.3":
   version: 3.2.3
   resolution: "csstype@npm:3.2.3"
   checksum: 10c0/cd29c51e70fa822f1cecd8641a1445bed7063697469d35633b516e60fe8c1bde04b08f6c5b6022136bb669b64c63d4173af54864510fbb4ee23281801841a3ce

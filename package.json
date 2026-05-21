@@ -55,7 +55,7 @@
   },
   "packageManager": "yarn@4.14.1",
   "engines": {
-    "node": ">=20.18.3 <24"
+    "node": ">=20.18.3 <25"
   },
   "dependencies": {
     "vercel": "latest"

@@ -4047,7 +4047,7 @@ __metadata:
     "@types/node": "npm:~24.12.0"
     "@types/react": "npm:~19.2.0"
     "@uniswap/sdk-core": "npm:~7.15.0"
-    "@uniswap/v2-sdk": "npm:~4.6.1"
+    "@uniswap/v2-sdk": "npm:~4.20.0"
     abitype: "npm:1.2.4"
     autoprefixer: "npm:~10.5.0"
     bgipfs: "npm:~0.0.12"
@@ -5714,24 +5714,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uniswap/sdk-core@npm:^5.9.0":
-  version: 5.9.0
-  resolution: "@uniswap/sdk-core@npm:5.9.0"
-  dependencies:
-    "@ethersproject/address": "npm:^5.0.2"
-    "@ethersproject/bytes": "npm:^5.7.0"
-    "@ethersproject/keccak256": "npm:5.7.0"
-    "@ethersproject/strings": "npm:5.7.0"
-    big.js: "npm:^5.2.2"
-    decimal.js-light: "npm:^2.5.0"
-    jsbi: "npm:^3.1.4"
-    tiny-invariant: "npm:^1.1.0"
-    toformat: "npm:^2.0.0"
-  checksum: 10c0/08dfac3374e8c00557fa27e8671fd9f1169ef141d2bfbb0db0d513b14b463eef2eac1883de530d1acdb7ef63f4724d994569ba983c55ca613d58b4d3a3572c41
-  languageName: node
-  linkType: hard
-
-"@uniswap/sdk-core@npm:~7.15.0":
+"@uniswap/sdk-core@npm:^7.15.0, @uniswap/sdk-core@npm:~7.15.0":
   version: 7.15.0
   resolution: "@uniswap/sdk-core@npm:7.15.0"
   dependencies:
@@ -5750,16 +5733,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uniswap/v2-sdk@npm:~4.6.1":
-  version: 4.6.2
-  resolution: "@uniswap/v2-sdk@npm:4.6.2"
+"@uniswap/v2-sdk@npm:~4.20.0":
+  version: 4.20.1
+  resolution: "@uniswap/v2-sdk@npm:4.20.1"
   dependencies:
     "@ethersproject/address": "npm:^5.0.2"
+    "@ethersproject/bignumber": "npm:^5.5.0"
     "@ethersproject/solidity": "npm:^5.0.9"
-    "@uniswap/sdk-core": "npm:^5.9.0"
+    "@uniswap/sdk-core": "npm:^7.15.0"
+    jsbi: "npm:^3.1.4"
     tiny-invariant: "npm:^1.1.0"
     tiny-warning: "npm:^1.0.3"
-  checksum: 10c0/eb013b069395756c6067e3191b09d8157b40b0908f3bb42576e56007a348cf605f037b1f4451acd1f441b31870096fe53151bab293f8db72cdec078de72bda20
+    tslib: "npm:^2.3.0"
+  checksum: 10c0/532f146a04a62f6b5c1ebefbc9ffcd86ef6a24216ad7d4c7d0ffed555423c8c8156c2dd5154f7b6ad875d04f02fc74fd51fc1de5798498914af186bf4b4890df
   languageName: node
   linkType: hard
 

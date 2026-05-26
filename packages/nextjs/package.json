@@ -45,7 +45,7 @@
     "abitype": "1.2.4",
     "autoprefixer": "~10.5.0",
     "bgipfs": "~0.0.12",
-    "eslint": "~9.23.0",
+    "eslint": "~9.39.0",
     "eslint-config-next": "~15.3.0",
     "eslint-config-prettier": "~10.1.1",
     "eslint-plugin-prettier": "~5.2.4",

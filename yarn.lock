@@ -3985,7 +3985,7 @@ __metadata:
     next-themes: "npm:~0.4.0"
     postcss: "npm:~8.5.0"
     prettier: "npm:~3.8.0"
-    qrcode.react: "npm:~4.0.1"
+    qrcode.react: "npm:~4.2.0"
     react: "npm:~19.2.0"
     react-dom: "npm:~19.2.0"
     react-hot-toast: "npm:~2.6.0"
@@ -15464,12 +15464,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"qrcode.react@npm:~4.0.1":
-  version: 4.0.1
-  resolution: "qrcode.react@npm:4.0.1"
+"qrcode.react@npm:~4.2.0":
+  version: 4.2.0
+  resolution: "qrcode.react@npm:4.2.0"
   peerDependencies:
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 10c0/b4c1b8874f88dd1f42573c6c9d753d3ee3e8cd4ee799962e530ae51e7fad0b020a8bd3f016a6ab4f69e2151aadf019405b16e46c11f532c2b51fc4b8159fcc73
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10c0/68c691d130e5fda2f57cee505ed7aea840e7d02033100687b764601f9595e1116e34c13876628a93e1a5c2b85e4efc27d30b2fda72e2050c02f3e1c4e998d248
   languageName: node
   linkType: hard
 

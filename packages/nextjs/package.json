@@ -25,7 +25,7 @@
     "burner-connector": "0.0.20",
     "daisyui": "5.5.20",
     "kubo-rpc-client": "~5.4.0",
-    "next": "~15.5.0",
+    "next": "~16.2.0",
     "next-nprogress-bar": "~2.4.0",
     "next-themes": "~0.4.0",
     "qrcode.react": "~4.0.1",
@@ -34,7 +34,7 @@
     "react-hot-toast": "~2.6.0",
     "usehooks-ts": "~3.1.0",
     "viem": "2.50.4",
-    "wagmi": "2.19.5",
+    "wagmi": "3.6.16",
     "zustand": "~5.0.0"
   },
   "devDependencies": {

@@ -1,6 +1,5 @@
 {
   "installCommand": "corepack enable && yarn install --no-immutable",
   "buildCommand": "cd packages/nextjs && npx next build",
-  "outputDirectory": "packages/nextjs/.next",
-  "framework": "nextjs"
+  "outputDirectory": "packages/nextjs/.next"
 }

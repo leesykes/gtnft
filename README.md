@@ -1,86 +1,75 @@
-# GTNFT
+# GTNFT — Generative Tiling NFT
 
-Generative on-chain NFT collection built on Scaffold-ETH 2.
+On-chain generative art NFT collection deployed on Optimism Sepolia. Each token is a unique recursive tiling artwork generated entirely on-chain from the token ID as a seed.
 
-> [!NOTE]
-> 🤖 Scaffold-ETH 2 is AI-ready! It has everything agents need to build on Ethereum. Check `.agents/`, `.claude/`, `.opencode` or `.cursor/` for more info.
+- **Contract:** [`0xF71Ea2f0A4ffC8f98Dee72D1C19401430EB3d746`](https://sepolia-optimism.etherscan.io/address/0xF71Ea2f0A4ffC8f98Dee72D1C19401430EB3d746) on Optimism Sepolia
+- **Collection size:** 3,728 tokens
+- **Pricing:** Bonding curve — starts at 0.001 ETH, increases 0.2% per mint
+- **Art:** Fully on-chain SVG, generated recursively from token ID + contract address hash
 
-⚙️ Built using NextJS, RainbowKit, Foundry/Hardhat, Wagmi, Viem, and Typescript.
+## Stack
 
-- ✅ **Contract Hot Reload**: Your frontend auto-adapts to your smart contract as you edit it.
-- 🪝 **[Custom hooks](https://docs.scaffoldeth.io/hooks/)**: Collection of React hooks wrapper around [wagmi](https://wagmi.sh/) to simplify interactions with smart contracts with typescript autocompletion.
-- 🧱 [**Components**](https://docs.scaffoldeth.io/components/): Collection of common web3 components to quickly build your frontend.
-- 🔥 **Burner Wallet & Local Faucet**: Quickly test your application with a burner wallet and local faucet.
-- 🔐 **Integration with Wallet Providers**: Connect to different wallet providers and interact with the Ethereum network.
-
-![Debug Contracts tab](https://github.com/scaffold-eth/scaffold-eth-2/assets/55535804/b237af0c-5027-4849-a5c1-2e31495cccb1)
+Built on [Scaffold-ETH 2](https://scaffoldeth.io) — Next.js 16, Hardhat 3, wagmi, viem, RainbowKit, DaisyUI.
 
 ## Requirements
 
-Before you begin, you need to install the following tools:
-
-- [Node (>= v22.10.0)](https://nodejs.org/en/download/)
-- Yarn ([v1](https://classic.yarnpkg.com/en/docs/install/) or [v2+](https://yarnpkg.com/getting-started/install))
+- [Node.js >= 22.10.0](https://nodejs.org/en/download/) — use `nvm use` in the project root
+- [Yarn v4](https://yarnpkg.com/getting-started/install)
 - [Git](https://git-scm.com/downloads)
 
-## Quickstart
+## Local development
 
-To get started with Scaffold-ETH 2, follow the steps below:
-
-1. Install the latest version of Scaffold-ETH 2
-
-```
-npx create-eth@latest
-```
-
-This command will install all the necessary packages and dependencies, so it might take a while.
-
-> [!NOTE]
-> You can also initialize your project with one of our extensions to add specific features or starter-kits. Learn more in our [extensions documentation](https://docs.scaffoldeth.io/extensions/).
-
-2. Run a local network in the first terminal:
-
-```
+```bash
+# Terminal 1 — local blockchain
 yarn chain
-```
 
-This command starts a local Ethereum network that runs on your local machine and can be used for testing and development. Learn how to [customize your network configuration](https://docs.scaffoldeth.io/quick-start/environment#1-initialize-a-local-blockchain).
-
-3. On a second terminal, deploy the test contract:
-
-```
+# Terminal 2 — deploy contracts to local network
 yarn deploy
-```
 
-This command deploys a test smart contract to the local network. You can find more information about how to customize your contract and deployment script in our [documentation](https://docs.scaffoldeth.io/quick-start/environment#2-deploy-your-smart-contract).
-
-4. On a third terminal, start your NextJS app:
-
-```
+# Terminal 3 — start frontend
 yarn start
 ```
 
-Visit your app on: `http://localhost:3000`. You can interact with your smart contract using the `Debug Contracts` page. You can tweak the app config in `packages/nextjs/scaffold.config.ts`.
+Visit `http://localhost:3000`.
 
-**What's next**:
+## Deploy to Optimism Sepolia
 
-Visit the [What's next section of our docs](https://docs.scaffoldeth.io/quick-start/environment#whats-next) to learn how to:
+1. Generate or import a deployer account:
+   ```bash
+   yarn generate        # new random account
+   yarn account:import  # import existing private key
+   ```
+2. Fund the deployer with Optimism Sepolia ETH.
+3. Deploy:
+   ```bash
+   yarn deploy --network optimismSepolia
+   ```
+4. Verify on Etherscan:
+   ```bash
+   yarn verify --network optimismSepolia
+   ```
 
-- Edit your smart contracts
-- Edit your deployment scripts
-- Customize your frontend
-- Edit the app config
-- Writing and running tests
-- [Setting up external services and API keys](https://docs.scaffoldeth.io/deploying/deploy-smart-contracts#configuration-of-third-party-services-for-production-grade-apps)
+## Environment variables
 
-## Documentation
+Copy `.env.example` files in each package and fill in your own API keys for production:
 
-Visit our [docs](https://docs.scaffoldeth.io) to learn all the technical details and guides of Scaffold-ETH 2.
+```bash
+cp packages/hardhat/.env.example packages/hardhat/.env
+cp packages/nextjs/.env.example packages/nextjs/.env.local
+```
 
-To know more about its features, check out our [website](https://scaffoldeth.io).
+Key vars: `ALCHEMY_API_KEY`, `ETHERSCAN_API_KEY`, `NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID`.
 
-## Contributing to Scaffold-ETH 2
+## Project structure
 
-We welcome contributions to Scaffold-ETH 2!
+```
+packages/
+  hardhat/        Smart contracts, deploy scripts, tests
+  nextjs/         Frontend (Next.js App Router)
+```
 
-Please see [CONTRIBUTING.MD](https://github.com/scaffold-eth/scaffold-eth-2/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Scaffold-ETH 2.
+## Contract notes
+
+- Traits (palette, complexity, feature) are packed into a single `uint8` per token to minimise storage
+- SVG generation uses `viaIR: true` to work around Solidity's 16-variable stack limit in recursive functions
+- The recipient address for mint proceeds is hardcoded in the contract — change before redeploying a new collection

@@ -13,9 +13,16 @@ export type ScaffoldConfig = BaseConfig;
 
 export const DEFAULT_ALCHEMY_API_KEY = "oKxs-03sij-U_N0iOlrSsZFr29-IqbuF";
 
+// In development, hardhat is prepended so yarn start defaults to the local chain.
+// In production (Vercel), NODE_ENV is "production" so hardhat is excluded entirely,
+// and the store initialises with optimismSepolia as the default.
+const targetNetworks: readonly [chains.Chain, ...chains.Chain[]] =
+  process.env.NODE_ENV === "development"
+    ? [chains.hardhat, chains.optimismSepolia]
+    : [chains.optimismSepolia];
+
 const scaffoldConfig = {
-  // The networks on which your DApp is live
-  targetNetworks: [chains.hardhat, chains.optimismSepolia],
+  targetNetworks,
   // The interval at which your front-end polls the RPC servers for new data (it has no effect if you only target the local network (default is 4000))
   pollingInterval: 30000,
   // This is ours Alchemy's default API key.

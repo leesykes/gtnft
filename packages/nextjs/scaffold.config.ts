@@ -11,9 +11,14 @@ export type ScaffoldConfig = {
 
 export const DEFAULT_ALCHEMY_API_KEY = "IZYEU2cWBgnFmgiTAgpWD";
 
+const devNetworks = [chains.hardhat, chains.optimismSepolia] as const;
+const prodNetworks = [chains.optimismSepolia] as const;
+
 const scaffoldConfig = {
-  // The networks on which your DApp is live
-  targetNetworks: [chains.optimismSepolia],
+  // In development, hardhat is first so local tooling (faucet, debug page,
+  // block explorer) activates when connected to the local node.
+  // In production only optimismSepolia is present.
+  targetNetworks: process.env.NODE_ENV === "development" ? devNetworks : prodNetworks,
 
   // The interval at which your front-end polls the RPC servers for new data
   // it has no effect if you only target the local network (default is 4000)

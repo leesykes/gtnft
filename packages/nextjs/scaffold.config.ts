@@ -45,10 +45,13 @@ const scaffoldConfig = {
   walletConnectProjectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID || "3a8170812b534d0ff9d794f19a901d64",
 
   // Configure Burner Wallet visibility:
-  // - "localOnly": only show when all target networks are local (hardhat/anvil)
+  // - "localNetworksOnly": only show when ALL target networks are local (hardhat/anvil)
   // - "allNetworks": show on any configured target networks
   // - "disabled": completely disable
-  burnerWalletMode: "localNetworksOnly",
+  // In development we use "allNetworks" so the burner auto-connects to the local
+  // Hardhat node even though optimismSepolia is also in targetNetworks. This also
+  // enables the Faucet button, which only renders when a wallet is on hardhat.
+  burnerWalletMode: process.env.NODE_ENV === "development" ? "allNetworks" : "disabled",
 } as const satisfies ScaffoldConfig;
 
 export default scaffoldConfig;

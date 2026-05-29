@@ -3,16 +3,7 @@
 ## Migrate to latest Scaffold-ETH 2 ✓
 
 **Strategy:** Fresh SE2 checkout, port custom code in — rather than upgrading in-place.
-**Reference:** SE2 `main` @ `09d649e` (2026-05-28)
-**Branch:** `migration/se2-latest` → PR #49
-
-All migration steps complete. Branch open pending Vercel preview confirmation before merging to `main`.
-
-- [x] Step 1 — Bootstrap (SE2 clone, deps, package rename, `.nvmrc`)
-- [x] Step 2 — Smart contracts (Hardhat 3, rocketh deploy, stack-too-deep fix)
-- [x] Step 3 — Network config (Optimism Sepolia, existing contract preserved)
-- [x] Step 4 — Frontend (new SE2 style, `@scaffold-ui/components`, footer cleaned up)
-- [x] Step 5 — Deployment config (`vercel.json` framework hint removed, branch pushed, PR #49 open)
+**Reference:** SE2 `main` @ `09d649e` (2026-05-28) — merged via PR #49
 
 ---
 
@@ -20,15 +11,13 @@ All migration steps complete. Branch open pending Vercel preview confirmation be
 
 ### Housekeeping
 
-- [ ] Rename `packages/hardhat/test/YourContract.ts` → `GTNFT.ts` and rewrite for GTNFT
 - [ ] Remove unused `using HexStrings for uint160` from `GTNFT.sol` (library imported but never called)
-- [ ] Add `.github/workflows/lint.yaml` back to the branch (was excluded from push — needs a token with `workflow` scope or manual push via SSH)
+- [ ] Add `.github/workflows/lint.yaml` (excluded from original push — needs a token with `workflow` scope or manual push via SSH)
 
 ### Contract
 
 - [ ] Verify GTNFT on Optimism Sepolia Etherscan: `yarn verify --network optimismSepolia`
-- [ ] Write contract tests covering: mint pricing curve, collection limit enforcement, trait packing/unpacking, tokenURI base64 decode, SVG output validity
-- [ ] Gas profile `tokenURI` — recursive SVG generation could be expensive for high-complexity tokens; measure worst-case gas
+- [ ] Gas profile `tokenURI` worst-case — recursive SVG at max complexity; `tokenURI` already measured at ~432k gas average
 
 ### Frontend
 
@@ -37,15 +26,14 @@ All migration steps complete. Branch open pending Vercel preview confirmation be
 - [ ] Test mint flow end-to-end on Optimism Sepolia with a real wallet
 - [ ] Check mobile layout on `/GTNFT` gallery and `/your-GTNFT` pages
 
-### Infrastructure
-
-- [ ] Set Node 22 in Vercel project settings (Settings → General → Node.js Version) before first production deploy
-- [ ] Confirm Vercel preview deploy reads live contract on Optimism Sepolia correctly
-
 ---
 
 ### Done
 
-- [x] SE2 migration (see above)
+- [x] SE2 migration to Hardhat 3, Next.js 16, `@scaffold-ui` (PR #49)
 - [x] GTNFT rename (from YourCollectible)
 - [x] Deployed to Optimism Sepolia at `0xF71Ea2f0A4ffC8f98Dee72D1C19401430EB3d746`
+- [x] Vercel deployment fixed — `vercel.json` moved to `packages/nextjs/`, Root Directory set to `packages/nextjs`
+- [x] Debug Contracts nav link hidden in production, visible in dev (PR #50)
+- [x] Contract tests — 10 tests covering mint mechanics, pricing curve, tokenURI, trait storage (PR #50)
+- [x] Local dev network config — hardhat in `targetNetworks` for dev, burner wallet + faucet restored (PR #51)

@@ -8,7 +8,7 @@
 
 ## Requirements
 
-- [Node.js >= 18](https://nodejs.org/en/download/)
+- [Node.js >= 20](https://nodejs.org/en/download/)
 - [Yarn v4](https://yarnpkg.com/getting-started/install)
 - [Git](https://git-scm.com/downloads)
 
@@ -62,9 +62,18 @@ yarn start
 yarn deploy --reset
 ```
 
+> **Note:** `yarn chain` starts a fresh chain on every run — all contract state is lost. You must re-run `yarn deploy` each time you restart `yarn chain` before the frontend will work correctly.
+
 ### Network
 
-The live app targets **Optimism Sepolia**. For local development, `yarn chain` starts a local Hardhat network. To develop against Optimism Sepolia instead, update `targetNetworks` in `packages/nextjs/scaffold.config.ts`.
+The target network is selected automatically based on environment:
+
+| Environment | Default network |
+|---|---|
+| `yarn start` (local) | Hardhat (local node) |
+| Vercel (production) | Optimism Sepolia |
+
+No config changes are needed to switch between local and live development. To target a different live network, change `chains.optimismSepolia` in `packages/nextjs/scaffold.config.ts`.
 
 ---
 

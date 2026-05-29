@@ -2,7 +2,7 @@ import { ChainWithAttributes, getAlchemyHttpUrl } from "./networks";
 import { CurrencyAmount, Token } from "@uniswap/sdk-core";
 import { Pair, Route } from "@uniswap/v2-sdk";
 import { Address, createPublicClient, fallback, http, parseAbi } from "viem";
-import { mainnet } from "viem/chains";
+import { hardhat, mainnet } from "viem/chains";
 
 const alchemyHttpUrl = getAlchemyHttpUrl(mainnet.id);
 const rpcFallbacks = alchemyHttpUrl ? [http(alchemyHttpUrl), http()] : [http()];
@@ -19,9 +19,10 @@ const ABI = parseAbi([
 
 export const fetchPriceFromUniswap = async (targetNetwork: ChainWithAttributes): Promise<number> => {
   if (
-    targetNetwork.nativeCurrency.symbol !== "ETH" &&
-    targetNetwork.nativeCurrency.symbol !== "SEP" &&
-    !targetNetwork.nativeCurrencyTokenAddress
+    targetNetwork.id === hardhat.id ||
+    (targetNetwork.nativeCurrency.symbol !== "ETH" &&
+      targetNetwork.nativeCurrency.symbol !== "SEP" &&
+      !targetNetwork.nativeCurrencyTokenAddress)
   ) {
     return 0;
   }

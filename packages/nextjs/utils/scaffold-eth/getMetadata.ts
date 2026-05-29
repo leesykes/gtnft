@@ -3,12 +3,12 @@ import type { Metadata } from "next";
 const baseUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
   ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
   : `http://localhost:${process.env.PORT || 3000}`;
-const titleTemplate = "%s | SpeedRunEthereum";
+const titleTemplate = "%s | Scaffold-ETH 2";
 
 export const getMetadata = ({
   title,
   description,
-  imageRelativePath = "/thumbnail-challenge.png",
+  imageRelativePath = "/thumbnail.jpg",
 }: {
   title: string;
   description: string;
@@ -44,13 +44,7 @@ export const getMetadata = ({
       images: [imageUrl],
     },
     icons: {
-      icon: [
-        {
-          url: "/favicon.png",
-          sizes: "32x32",
-          type: "image/png",
-        },
-      ],
+      icon: [{ url: "/favicon.png", sizes: "32x32", type: "image/png" }],
     },
   };
 };

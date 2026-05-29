@@ -1,99 +1,86 @@
-# 🏗 GTNFT
+# GTNFT
 
-🎨 GTNFT is an on-chain SVG NFT collection. The artwork and metadata are generated and stored entirely on-chain using deterministic randomness and real-time SVG generation — no IPFS, no web servers, no external dependencies.
+Generative on-chain NFT collection built on Scaffold-ETH 2.
 
-🌐 **Live:** https://gtnft-ls.vercel.app
+> [!NOTE]
+> 🤖 Scaffold-ETH 2 is AI-ready! It has everything agents need to build on Ethereum. Check `.agents/`, `.claude/`, `.opencode` or `.cursor/` for more info.
 
----
+⚙️ Built using NextJS, RainbowKit, Foundry/Hardhat, Wagmi, Viem, and Typescript.
+
+- ✅ **Contract Hot Reload**: Your frontend auto-adapts to your smart contract as you edit it.
+- 🪝 **[Custom hooks](https://docs.scaffoldeth.io/hooks/)**: Collection of React hooks wrapper around [wagmi](https://wagmi.sh/) to simplify interactions with smart contracts with typescript autocompletion.
+- 🧱 [**Components**](https://docs.scaffoldeth.io/components/): Collection of common web3 components to quickly build your frontend.
+- 🔥 **Burner Wallet & Local Faucet**: Quickly test your application with a burner wallet and local faucet.
+- 🔐 **Integration with Wallet Providers**: Connect to different wallet providers and interact with the Ethereum network.
+
+![Debug Contracts tab](https://github.com/scaffold-eth/scaffold-eth-2/assets/55535804/b237af0c-5027-4849-a5c1-2e31495cccb1)
 
 ## Requirements
 
-- [Node.js >= 20](https://nodejs.org/en/download/)
-- [Yarn v4](https://yarnpkg.com/getting-started/install)
+Before you begin, you need to install the following tools:
+
+- [Node (>= v22.10.0)](https://nodejs.org/en/download/)
+- Yarn ([v1](https://classic.yarnpkg.com/en/docs/install/) or [v2+](https://yarnpkg.com/getting-started/install))
 - [Git](https://git-scm.com/downloads)
 
----
+## Quickstart
 
-## Local Development
+To get started with Scaffold-ETH 2, follow the steps below:
 
-> Clone the repo and install dependencies
+1. Install the latest version of Scaffold-ETH 2
 
-```sh
-git clone https://github.com/leesykes/gtnft.git
-cd gtnft
-yarn install
+```
+npx create-eth@latest
 ```
 
-> Copy the environment file and add your API keys
+This command will install all the necessary packages and dependencies, so it might take a while.
 
-```sh
-cp packages/nextjs/.env.example packages/nextjs/.env.local
+> [!NOTE]
+> You can also initialize your project with one of our extensions to add specific features or starter-kits. Learn more in our [extensions documentation](https://docs.scaffoldeth.io/extensions/).
+
+2. Run a local network in the first terminal:
+
 ```
-
-Edit `.env.local` and fill in:
-- `NEXT_PUBLIC_ALCHEMY_API_KEY` — get one free at [alchemy.com](https://www.alchemy.com)
-- `NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID` — get one free at [cloud.walletconnect.com](https://cloud.walletconnect.com)
-
-The app ships with shared demo keys so you can prototype immediately, but they are rate-limited and not suitable for production.
-
-> Start a local blockchain
-
-```sh
 yarn chain
 ```
 
-> In a second terminal, deploy the contracts locally
+This command starts a local Ethereum network that runs on your local machine and can be used for testing and development. Learn how to [customize your network configuration](https://docs.scaffoldeth.io/quick-start/environment#1-initialize-a-local-blockchain).
 
-```sh
+3. On a second terminal, deploy the test contract:
+
+```
 yarn deploy
 ```
 
-> In a third terminal, start the frontend
+This command deploys a test smart contract to the local network. You can find more information about how to customize your contract and deployment script in our [documentation](https://docs.scaffoldeth.io/quick-start/environment#2-deploy-your-smart-contract).
 
-```sh
+4. On a third terminal, start your NextJS app:
+
+```
 yarn start
 ```
 
-📱 Open http://localhost:3000
+Visit your app on: `http://localhost:3000`. You can interact with your smart contract using the `Debug Contracts` page. You can tweak the app config in `packages/nextjs/scaffold.config.ts`.
 
-> To redeploy contracts after making changes:
+**What's next**:
 
-```sh
-yarn deploy --reset
-```
+Visit the [What's next section of our docs](https://docs.scaffoldeth.io/quick-start/environment#whats-next) to learn how to:
 
-> **Note:** `yarn chain` starts a fresh chain on every run — all contract state is lost. You must re-run `yarn deploy` each time you restart `yarn chain` before the frontend will work correctly.
+- Edit your smart contracts
+- Edit your deployment scripts
+- Customize your frontend
+- Edit the app config
+- Writing and running tests
+- [Setting up external services and API keys](https://docs.scaffoldeth.io/deploying/deploy-smart-contracts#configuration-of-third-party-services-for-production-grade-apps)
 
-### Network
+## Documentation
 
-The target network is selected automatically based on environment:
+Visit our [docs](https://docs.scaffoldeth.io) to learn all the technical details and guides of Scaffold-ETH 2.
 
-| Environment | Default network |
-|---|---|
-| `yarn start` (local) | Hardhat (local node) |
-| Vercel (production) | Optimism Sepolia |
+To know more about its features, check out our [website](https://scaffoldeth.io).
 
-No config changes are needed to switch between local and live development. To target a different live network, change `chains.optimismSepolia` in `packages/nextjs/scaffold.config.ts`.
+## Contributing to Scaffold-ETH 2
 
----
+We welcome contributions to Scaffold-ETH 2!
 
-## Contracts
-
-Smart contracts live in `packages/hardhat/contracts/`:
-
-- `GTNFT.sol` — the main NFT contract with on-chain SVG generation
-
----
-
-## Deployment
-
-The frontend deploys automatically to Vercel on every push to `main`. Environment variables (`NEXT_PUBLIC_ALCHEMY_API_KEY`, `NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID`) are configured in the Vercel project settings.
-
----
-
-## Built with
-
-- [Scaffold-ETH 2](https://scaffoldeth.io) — Ethereum development framework
-- [Next.js 15](https://nextjs.org)
-- [wagmi](https://wagmi.sh) / [viem](https://viem.sh)
-- [Optimism Sepolia](https://docs.optimism.io/chain/networks)
+Please see [CONTRIBUTING.MD](https://github.com/scaffold-eth/scaffold-eth-2/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Scaffold-ETH 2.

@@ -33,7 +33,7 @@ export const RPC_CHAIN_NAMES: Record<number, string> = {
   [chains.baseGoerli.id]: "base-goerli",
   [chains.baseSepolia.id]: "base-sepolia",
   [chains.celo.id]: "celo-mainnet",
-  [chains.celoAlfajores.id]: "celo-alfajores",
+  [chains.celoSepolia.id]: "celo-sepolia",
 };
 
 export const getAlchemyHttpUrl = (chainId: number) => {
@@ -87,7 +87,7 @@ export const NETWORKS_EXTRA_DATA: Record<string, ChainAttributes> = {
   [chains.celo.id]: {
     color: "#FCFF52",
   },
-  [chains.celoAlfajores.id]: {
+  [chains.celoSepolia.id]: {
     color: "#476520",
   },
 };
@@ -115,23 +115,6 @@ export function getBlockExplorerTxLink(chainId: number, txnHash: string) {
   }
 
   return `${blockExplorerTxURL}/tx/${txnHash}`;
-}
-
-/**
- * Gives the block explorer URL for a given address.
- * Defaults to Etherscan if no (wagmi) block explorer is configured for the network.
- */
-export function getBlockExplorerAddressLink(network: chains.Chain, address: string) {
-  const blockExplorerBaseURL = network.blockExplorers?.default?.url;
-  if (network.id === chains.hardhat.id) {
-    return `/blockexplorer/address/${address}`;
-  }
-
-  if (!blockExplorerBaseURL) {
-    return `https://etherscan.io/address/${address}`;
-  }
-
-  return `${blockExplorerBaseURL}/address/${address}`;
 }
 
 /**

@@ -1,18 +1,16 @@
-import { HardhatRuntimeEnvironment } from "hardhat/types";
-import { DeployFunction } from "hardhat-deploy/types";
+import { deployScript, artifacts } from "../rocketh/deploy.js";
 
-const deployGTNFT: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
-  const { deployer } = await hre.getNamedAccounts();
-  const { deploy } = hre.deployments;
+export default deployScript(
+  async env => {
+    const { deployer } = env.namedAccounts;
 
-  await deploy("GTNFT", {
-    from: deployer,
-    args: [],
-    log: true,
-    autoMine: true,
-  });
-};
-
-export default deployGTNFT;
-
-deployGTNFT.tags = ["GTNFT"];
+    await env.deploy("GTNFT", {
+      account: deployer,
+      artifact: artifacts.GTNFT,
+      args: [],
+    });
+  },
+  {
+    tags: ["GTNFT"],
+  },
+);

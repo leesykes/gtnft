@@ -41,13 +41,12 @@ export const menuLinks: HeaderMenuLink[] = [
 
 export const HeaderMenuLinks = () => {
   const pathname = usePathname();
-  const { targetNetwork } = useTargetNetwork();
-  const isLocalNetwork = targetNetwork.id === hardhat.id;
+  const isDev = process.env.NODE_ENV === "development";
 
   return (
     <>
       {menuLinks
-        .filter(link => !link.localOnly || isLocalNetwork)
+        .filter(link => !link.localOnly || isDev)
         .map(({ label, href, icon }) => {
           const isActive = pathname === href;
           return (

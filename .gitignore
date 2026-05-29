@@ -18,7 +18,11 @@ node_modules
 # IDE
 .vscode
 .idea
+.cursor
+.opencode
+opencode.json
+.mcp.json
+.claude
 
 # cli
 dist
-package-lock.json

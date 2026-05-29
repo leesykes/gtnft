@@ -1,99 +1,102 @@
-# 🏗 GTNFT
+# GTNFT — Generative Tiling NFT
 
-🎨 GTNFT is an on-chain SVG NFT collection. The artwork and metadata are generated and stored entirely on-chain using deterministic randomness and real-time SVG generation — no IPFS, no web servers, no external dependencies.
+On-chain generative art NFT collection deployed on Optimism Sepolia. Each token is a unique recursive tiling artwork generated entirely on-chain from the token ID as a seed.
 
-🌐 **Live:** https://gtnft-ls.vercel.app
+- **Contract:** [`0xF71Ea2f0A4ffC8f98Dee72D1C19401430EB3d746`](https://sepolia-optimism.etherscan.io/address/0xF71Ea2f0A4ffC8f98Dee72D1C19401430EB3d746) on Optimism Sepolia
+- **Collection size:** 3,728 tokens
+- **Pricing:** Bonding curve — starts at 0.001 ETH, increases 0.2% per mint
+- **Art:** Fully on-chain SVG, generated recursively from token ID + contract address hash
 
----
+## Stack
+
+Built on [Scaffold-ETH 2](https://scaffoldeth.io) — Next.js 16, Hardhat 3, wagmi, viem, RainbowKit, DaisyUI.
 
 ## Requirements
 
-- [Node.js >= 20](https://nodejs.org/en/download/)
+- [Node.js >= 22.10.0](https://nodejs.org/en/download/) — use `nvm use` in the project root
 - [Yarn v4](https://yarnpkg.com/getting-started/install)
 - [Git](https://git-scm.com/downloads)
 
----
+## Local development
 
-## Local Development
+The frontend is configured to target Optimism Sepolia by default. To develop against a local chain, first switch the target network in `packages/nextjs/scaffold.config.ts`:
 
-> Clone the repo and install dependencies
-
-```sh
-git clone https://github.com/leesykes/gtnft.git
-cd gtnft
-yarn install
+```ts
+targetNetworks: [chains.hardhat],  // change from chains.optimismSepolia
 ```
 
-> Copy the environment file and add your API keys
+Then start the three services in separate terminals:
 
-```sh
-cp packages/nextjs/.env.example packages/nextjs/.env.local
-```
-
-Edit `.env.local` and fill in:
-- `NEXT_PUBLIC_ALCHEMY_API_KEY` — get one free at [alchemy.com](https://www.alchemy.com)
-- `NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID` — get one free at [cloud.walletconnect.com](https://cloud.walletconnect.com)
-
-The app ships with shared demo keys so you can prototype immediately, but they are rate-limited and not suitable for production.
-
-> Start a local blockchain
-
-```sh
+```bash
+# Terminal 1 — start a local Hardhat blockchain
 yarn chain
-```
 
-> In a second terminal, deploy the contracts locally
-
-```sh
+# Terminal 2 — compile and deploy contracts to the local network
 yarn deploy
-```
 
-> In a third terminal, start the frontend
-
-```sh
+# Terminal 3 — start the Next.js frontend
 yarn start
 ```
 
-📱 Open http://localhost:3000
+Visit `http://localhost:3000`. The app will connect to the local chain, and the faucet and block explorer links will appear in the footer.
 
-> To redeploy contracts after making changes:
+When you're done with local development, revert `scaffold.config.ts` back to `chains.optimismSepolia` before pushing.
 
-```sh
-yarn deploy --reset
+## Running against the live Optimism Sepolia contract
+
+With `scaffold.config.ts` targeting `chains.optimismSepolia` (the default), just start the frontend — no local chain needed:
+
+```bash
+yarn start
 ```
 
-> **Note:** `yarn chain` starts a fresh chain on every run — all contract state is lost. You must re-run `yarn deploy` each time you restart `yarn chain` before the frontend will work correctly.
+The app will connect to the deployed contract at `0xF71Ea2f0A4ffC8f98Dee72D1C19401430EB3d746`.
 
-### Network
+## Deploying a new contract to Optimism Sepolia
 
-The target network is selected automatically based on environment:
+Only needed if redeploying after contract changes. The existing contract is already live — see above to run against it.
 
-| Environment | Default network |
-|---|---|
-| `yarn start` (local) | Hardhat (local node) |
-| Vercel (production) | Optimism Sepolia |
+1. Set up your `.env` files (see [Environment variables](#environment-variables) below).
+2. Generate or import a deployer account:
+   ```bash
+   yarn generate        # create a new random account
+   yarn account:import  # import an existing private key
+   ```
+3. Fund the deployer address with Optimism Sepolia ETH from the [Optimism faucet](https://app.optimism.io/faucet).
+4. Deploy:
+   ```bash
+   yarn deploy --network optimismSepolia
+   ```
+5. Verify on Etherscan:
+   ```bash
+   yarn verify --network optimismSepolia
+   ```
+6. Update the contract address in `packages/hardhat/deployments/optimismSepolia/GTNFT.json` and regenerate the frontend ABI:
+   ```bash
+   yarn deploy --network optimismSepolia  # also runs generateTsAbis automatically
+   ```
 
-No config changes are needed to switch between local and live development. To target a different live network, change `chains.optimismSepolia` in `packages/nextjs/scaffold.config.ts`.
+## Environment variables
 
----
+Copy `.env.example` files in each package and fill in your own API keys for production:
 
-## Contracts
+```bash
+cp packages/hardhat/.env.example packages/hardhat/.env
+cp packages/nextjs/.env.example packages/nextjs/.env.local
+```
 
-Smart contracts live in `packages/hardhat/contracts/`:
+Key vars: `ALCHEMY_API_KEY`, `ETHERSCAN_API_KEY`, `NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID`.
 
-- `GTNFT.sol` — the main NFT contract with on-chain SVG generation
+## Project structure
 
----
+```
+packages/
+  hardhat/        Smart contracts, deploy scripts, tests
+  nextjs/         Frontend (Next.js App Router)
+```
 
-## Deployment
+## Contract notes
 
-The frontend deploys automatically to Vercel on every push to `main`. Environment variables (`NEXT_PUBLIC_ALCHEMY_API_KEY`, `NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID`) are configured in the Vercel project settings.
-
----
-
-## Built with
-
-- [Scaffold-ETH 2](https://scaffoldeth.io) — Ethereum development framework
-- [Next.js 15](https://nextjs.org)
-- [wagmi](https://wagmi.sh) / [viem](https://viem.sh)
-- [Optimism Sepolia](https://docs.optimism.io/chain/networks)
+- Traits (palette, complexity, feature) are packed into a single `uint8` per token to minimise storage
+- SVG generation uses `viaIR: true` to work around Solidity's 16-variable stack limit in recursive functions
+- The recipient address for mint proceeds is hardcoded in the contract — change before redeploying a new collection

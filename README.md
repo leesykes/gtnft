@@ -19,34 +19,61 @@ Built on [Scaffold-ETH 2](https://scaffoldeth.io) — Next.js 16, Hardhat 3, wag
 
 ## Local development
 
+The frontend is configured to target Optimism Sepolia by default. To develop against a local chain, first switch the target network in `packages/nextjs/scaffold.config.ts`:
+
+```ts
+targetNetworks: [chains.hardhat],  // change from chains.optimismSepolia
+```
+
+Then start the three services in separate terminals:
+
 ```bash
-# Terminal 1 — local blockchain
+# Terminal 1 — start a local Hardhat blockchain
 yarn chain
 
-# Terminal 2 — deploy contracts to local network
+# Terminal 2 — compile and deploy contracts to the local network
 yarn deploy
 
-# Terminal 3 — start frontend
+# Terminal 3 — start the Next.js frontend
 yarn start
 ```
 
-Visit `http://localhost:3000`.
+Visit `http://localhost:3000`. The app will connect to the local chain, and the faucet and block explorer links will appear in the footer.
 
-## Deploy to Optimism Sepolia
+When you're done with local development, revert `scaffold.config.ts` back to `chains.optimismSepolia` before pushing.
 
-1. Generate or import a deployer account:
+## Running against the live Optimism Sepolia contract
+
+With `scaffold.config.ts` targeting `chains.optimismSepolia` (the default), just start the frontend — no local chain needed:
+
+```bash
+yarn start
+```
+
+The app will connect to the deployed contract at `0xF71Ea2f0A4ffC8f98Dee72D1C19401430EB3d746`.
+
+## Deploying a new contract to Optimism Sepolia
+
+Only needed if redeploying after contract changes. The existing contract is already live — see above to run against it.
+
+1. Set up your `.env` files (see [Environment variables](#environment-variables) below).
+2. Generate or import a deployer account:
    ```bash
-   yarn generate        # new random account
-   yarn account:import  # import existing private key
+   yarn generate        # create a new random account
+   yarn account:import  # import an existing private key
    ```
-2. Fund the deployer with Optimism Sepolia ETH.
-3. Deploy:
+3. Fund the deployer address with Optimism Sepolia ETH from the [Optimism faucet](https://app.optimism.io/faucet).
+4. Deploy:
    ```bash
    yarn deploy --network optimismSepolia
    ```
-4. Verify on Etherscan:
+5. Verify on Etherscan:
    ```bash
    yarn verify --network optimismSepolia
+   ```
+6. Update the contract address in `packages/hardhat/deployments/optimismSepolia/GTNFT.json` and regenerate the frontend ABI:
+   ```bash
+   yarn deploy --network optimismSepolia  # also runs generateTsAbis automatically
    ```
 
 ## Environment variables

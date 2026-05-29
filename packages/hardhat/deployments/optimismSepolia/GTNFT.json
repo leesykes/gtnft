@@ -598,7 +598,7 @@
           "type": "uint8"
         },
         {
-          "internalType": "enum YourCollectible.Feature",
+          "internalType": "enum GTNFT.Feature",
           "name": "feature",
           "type": "uint8"
         }
@@ -984,7 +984,7 @@
       },
       "t_enum(Feature)3573": {
         "encoding": "inplace",
-        "label": "enum YourCollectible.Feature",
+        "label": "enum GTNFT.Feature",
         "numberOfBytes": "1"
       },
       "t_mapping(t_address,t_bool)": {

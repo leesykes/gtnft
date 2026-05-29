@@ -13,25 +13,25 @@ const YourGTNFT: NextPage = () => {
   const [loadingGTNFT, setLoadingGTNFT] = useState(true);
 
   const { data: price } = useScaffoldReadContract({
-    contractName: "YourCollectible",
+    contractName: "GTNFT",
     functionName: "price",
   });
 
   const { data: totalSupply } = useScaffoldReadContract({
-    contractName: "YourCollectible",
+    contractName: "GTNFT",
     functionName: "totalSupply",
   });
 
   const { data: balance } = useScaffoldReadContract({
-    contractName: "YourCollectible",
+    contractName: "GTNFT",
     functionName: "balanceOf",
     args: [connectedAddress],
   });
 
-  const { writeContractAsync } = useScaffoldWriteContract({ contractName: "YourCollectible" });
+  const { writeContractAsync } = useScaffoldWriteContract({ contractName: "GTNFT" });
 
   const { data: contract } = useScaffoldContract({
-    contractName: "YourCollectible",
+    contractName: "GTNFT",
   });
 
   useEffect(() => {

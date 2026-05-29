@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 import "base64-sol/base64.sol";
 import "./HexStrings.sol";
 
-contract YourCollectible is ERC721Enumerable {
+contract GTNFT is ERC721Enumerable {
     using Strings for uint256;
     using HexStrings for uint160;
 

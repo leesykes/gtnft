@@ -81,7 +81,7 @@ No config changes are needed to switch between local and live development. To ta
 
 Smart contracts live in `packages/hardhat/contracts/`:
 
-- `YourCollectible.sol` — the main NFT contract with on-chain SVG generation
+- `GTNFT.sol` — the main NFT contract with on-chain SVG generation
 
 ---
 
